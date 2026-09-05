@@ -168,6 +168,7 @@ md-slider { --md-slider-active-track-color: var(--md-sys-color-primary); width: 
 /* ---------- 砌法 chips ---------- */
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
 #motifWrap { margin-top: 10px; }
+#regenerate { margin-top: 14px; }
 
 /* ---------- 操作 ---------- */
 .btns { display: flex; flex-direction: column; gap: 10px; }
