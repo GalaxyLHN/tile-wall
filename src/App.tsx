@@ -14,6 +14,7 @@ import { SizeSection } from './components/SizeSection';
 import { DiffSection } from './components/DiffSection';
 import { LayoutSection } from './components/LayoutSection';
 import { ExportSection } from './components/ExportSection';
+import { AboutSection } from './components/AboutSection';
 
 const DEFAULT: TileParams = {
   seed: 1234,
@@ -51,6 +52,10 @@ const TABS: { label: string; path: string }[] = [
   {
     label: '导出',
     path: 'M480-313 287-506l43-43 120 120v-371h60v371l120-120 43 43-193 193ZM220-160q-24 0-42-18t-18-42v-143h60v143h520v-143h60v143q0 24-18 42t-42 18H220Z',
+  },
+  {
+    label: '关于',
+    path: 'M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-120q-17 0-28.5-11.5T440-320q0-17 11.5-28.5T480-360q17 0 28.5 11.5T520-320q0 17-11.5 28.5T480-280Zm-40-160v-240h80v240h-80Z',
   },
 ];
 
@@ -198,6 +203,11 @@ export function App() {
               onSVG={downloadSVG}
               onPNG={downloadPNG}
             />
+          </section>
+
+          <section className={`group tabpanel${activeTab === 5 ? ' active' : ''}`}>
+            <h2>关于</h2>
+            <AboutSection />
           </section>
         </div>
       </aside>
