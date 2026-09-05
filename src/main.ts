@@ -8,6 +8,8 @@ import '@material/web/button/outlined-button.js';
 import '@material/web/iconbutton/icon-button.js';
 import '@material/web/chips/filter-chip.js';
 import '@material/web/textfield/outlined-text-field.js';
+import '@material/web/tabs/tabs.js';
+import '@material/web/tabs/primary-tab.js';
 
 import {
   type ChipMode,
@@ -138,6 +140,19 @@ function bind(): void {
   // 砌法 chips
   byId('chipNoise').addEventListener('click', () => setChip('noise'));
   byId('chipGrid').addEventListener('click', () => setChip('grid'));
+
+  // 窄屏功能 Tab
+  const tabs = byId('mobileTabs') as HTMLElement & { activeTabIndex: number };
+  const activateTab = (idx: number) => {
+    // md-tabs 升级前 activeTabIndex 可能是 -1/NaN，兜底成 0
+    const safe = Number.isInteger(idx) && idx >= 0 ? idx : 0;
+    document.querySelectorAll<HTMLElement>('.tabpanel').forEach((p, i) =>
+      p.classList.toggle('active', i === safe),
+    );
+  };
+  tabs.addEventListener('change', () => activateTab(tabs.activeTabIndex));
+  // 用静态 attribute 初始化，避免依赖组件升级时序
+  activateTab(Number(tabs.getAttribute('active-tab-index') ?? 0));
 
   // 操作
   byId('regenerate').addEventListener('click', regenerate);

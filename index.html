@@ -13,8 +13,19 @@
         <h1>瓷砖墙生成器</h1>
       </header>
 
+      <!-- 窄屏功能 Tab -->
+      <md-tabs id="mobileTabs" active-tab-index="0">
+        <md-primary-tab>种子颜色</md-primary-tab>
+        <md-primary-tab>墙身尺寸</md-primary-tab>
+        <md-primary-tab>色差幅度</md-primary-tab>
+        <md-primary-tab>样式</md-primary-tab>
+        <md-primary-tab>导出</md-primary-tab>
+      </md-tabs>
+
+      <div class="tabpanels">
+
       <!-- 种子颜色 -->
-      <section class="group">
+      <section class="group tabpanel active" data-tab="0" id="tabpanel-0">
         <h2>种子颜色</h2>
         <div class="seedrow">
           <button class="swatch" id="btnSwatch" title="选择颜色" aria-label="选择颜色">
@@ -32,7 +43,7 @@
       </section>
 
       <!-- 墙身尺寸 -->
-      <section class="group">
+      <section class="group tabpanel" data-tab="1" id="tabpanel-1">
         <h2>墙身尺寸</h2>
         <div class="slidergrid">
           <div class="sf-row">
@@ -55,7 +66,7 @@
       </section>
 
       <!-- 色差幅度 -->
-      <section class="group">
+      <section class="group tabpanel" data-tab="2" id="tabpanel-2">
         <h2>色差幅度（越大越跳色）</h2>
         <div class="slidergrid">
           <div class="sf-row">
@@ -74,7 +85,7 @@
       </section>
 
       <!-- 样式 -->
-      <section class="group">
+      <section class="group tabpanel" data-tab="3" id="tabpanel-3">
         <h2>样式</h2>
         <div class="lbl">砌法</div>
         <div class="chips">
@@ -89,8 +100,8 @@
         </div>
       </section>
 
-      <!-- 操作 -->
-      <section class="group">
+      <!-- 操作（导出） -->
+      <section class="group tabpanel" data-tab="4" id="tabpanel-4">
         <div class="btns">
           <md-filled-button id="download">
             <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
@@ -107,6 +118,7 @@
         </div>
         <div class="meta" id="meta">&nbsp;</div>
       </section>
+      </div><!-- /.tabpanels -->
     </aside>
 
     <section class="stage" id="stage">
