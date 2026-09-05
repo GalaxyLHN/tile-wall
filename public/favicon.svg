@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 底板：深蓝砖缝 -->
+  <rect width="64" height="64" rx="12" fill="#0b1620"/>
+  <!-- 砖缝（四块砖的间隙） -->
+  <rect x="2" y="30" width="60" height="4" fill="#0b0d11"/>
+  <rect x="30" y="2" width="4" height="28" fill="#0b0d11"/>
+  <rect x="30" y="34" width="4" height="28" fill="#0b0d11"/>
+  <!-- 四块等大方砖，微色差 -->
+  <rect x="6" y="6" width="20" height="20" rx="3" fill="#2f81a5"/>
+  <rect x="38" y="6" width="20" height="20" rx="3" fill="#3a8ab0"/>
+  <rect x="6" y="38" width="20" height="20" rx="3" fill="#3a8ab0"/>
+  <rect x="38" y="38" width="20" height="20" rx="3" fill="#2f81a5"/>
+</svg>
