@@ -141,11 +141,15 @@ export function renderToCanvas(
     const off = p.tile / 2 + p.grout / 2;
     const rim = TILE_RIM;
     for (let r = 0; r < p.rows; r++) {
-      const shift = r % 2 === 0 ? 0 : off;
-      for (let c = 0; c < p.cols; c++) {
+      const shifted = r % 2 === 1;
+      // 偏移行最左侧补一块出界的半砖，消除左边缘空白（超出画布部分自动裁掉）
+      const shift = shifted ? off : 0;
+      const startC = shifted ? -1 : 0;
+      for (let c = startC; c < p.cols; c++) {
         const x = p.grout + c * step + shift;
         const y = p.grout + r * step;
-        ctx.fillStyle = cells[r][c];
+        // 左侧补的那块砖按行循环取色（-1 → cols-1）
+        ctx.fillStyle = cells[r][((c % p.cols) + p.cols) % p.cols];
         ctx.fillRect(x + rim, y + rim, p.tile - rim * 2, p.tile - rim * 2);
       }
     }
@@ -174,12 +178,13 @@ export function exportSVG(cells: string[][], p: TileParams): string {
     const rim = TILE_RIM;
     const s = p.tile - rim * 2;
     for (let r = 0; r < p.rows; r++) {
-      const shift = r % 2 === 0 ? 0 : off;
-      const x0 = p.grout + shift;
-      for (let c = 0; c < p.cols; c++) {
-        const x = x0 + c * step + rim;
+      const shifted = r % 2 === 1;
+      const shift = shifted ? off : 0;
+      const startC = shifted ? -1 : 0;
+      for (let c = startC; c < p.cols; c++) {
+        const x = p.grout + c * step + shift + rim;
         const y = p.grout + r * step + rim;
-        rects += `<rect x="${x}" y="${y}" width="${s}" height="${s}" fill="${cells[r][c]}"/>`;
+        rects += `<rect x="${x}" y="${y}" width="${s}" height="${s}" fill="${cells[r][((c % p.cols) + p.cols) % p.cols]}"/>`;
       }
     }
   } else {
