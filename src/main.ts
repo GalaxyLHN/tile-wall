@@ -136,6 +136,13 @@ function bind(): void {
   byId('seedColor').addEventListener('input', (e) =>
       applyHex((e.target as HTMLInputElement).value),
     );
+    byId('btnRandom').addEventListener('click', () => {
+      // 随机换色：色相全域 0–360°，饱和度与明度均 30–70%
+      const h = Math.random() * 360;
+      const s = (30 + Math.random() * 40) / 100;
+      const l = (30 + Math.random() * 40) / 100;
+      applyHex(hslToHex(h, s, l));
+    });
     byId('seedHex').addEventListener('change', (e) => {
       const target = e.target as unknown as { value: string };
       const m = /^#?([0-9a-fA-F]{6})$/.exec(target.value.trim());
