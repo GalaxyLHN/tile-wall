@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ============ Material 3 深色主题（琥珀基调，呼应港铁瓷钻） ============ */
 :root {
   color-scheme: dark;

@@ -10,9 +10,16 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.4.0",
-    "@material/web": "^2.5.0"
+    "@material/web": "^2.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "tailwindcss": "^4.1.0",
     "typescript": "^5.9.3",
     "vite": "^6.4.3"
   },
