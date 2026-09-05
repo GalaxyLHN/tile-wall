@@ -203,7 +203,7 @@ function download(): void {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download =
-    `mtr-wall-${state.cols}x${state.rows}-${state.baseHex.replace('#', '')}-seed${state.seed.toString(16)}.svg`;
+    `tile-wall-${state.cols}x${state.rows}-${state.baseHex.replace('#', '')}-seed${state.seed.toString(16)}.svg`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -213,7 +213,7 @@ function download(): void {
 function downloadPNG(): void {
   const a = document.createElement('a');
   a.download =
-    `mtr-wall-${state.cols}x${state.rows}-${state.baseHex.replace('#', '')}-seed${state.seed.toString(16)}.png`;
+    `tile-wall-${state.cols}x${state.rows}-${state.baseHex.replace('#', '')}-seed${state.seed.toString(16)}.png`;
   // 预览 canvas 就是当前参数渲染的成品，直接按原分辨率导出
   canvas.toBlob((blob) => {
     if (!blob) return;
