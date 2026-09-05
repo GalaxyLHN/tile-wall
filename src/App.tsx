@@ -8,6 +8,7 @@ import {
   renderToCanvas,
 } from './tile';
 import { applyThemeFromSeed, watchSystemScheme } from './theme';
+import { DEFAULT, readUrlParams, writeUrlParams } from './urlState';
 import { MdTabs } from './components/md';
 import { ColorSection } from './components/ColorSection';
 import { SizeSection } from './components/SizeSection';
@@ -15,21 +16,6 @@ import { DiffSection } from './components/DiffSection';
 import { LayoutSection } from './components/LayoutSection';
 import { ExportSection } from './components/ExportSection';
 import { AboutSection } from './components/AboutSection';
-
-const DEFAULT: TileParams = {
-  seed: 1234,
-  hue: 6,
-  sat: 14,
-  liq: 16,
-  motif: 9,
-  chip: 'noise',
-  cols: 30,
-  rows: 20,
-  tile: 34,
-  grout: 5,
-  baseHex: '#2E6F8E',
-  groutColor: '#0B0D11',
-};
 
 /** 窄屏底部功能 Tab（Material Symbols，960 坐标系） */
 const TABS: { label: string; path: string }[] = [
@@ -60,7 +46,9 @@ const TABS: { label: string; path: string }[] = [
 ];
 
 export function App() {
-  const [params, setParams] = useState<TileParams>(DEFAULT);
+  const [params, setParams] = useState<TileParams>(
+    () => ({ ...DEFAULT, ...readUrlParams() }),
+  );
   const [activeTab, setActiveTab] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<string[][]>([]);
@@ -92,6 +80,13 @@ export function App() {
     () => setParams((s) => ({ ...s, seed: (s.seed + Math.floor(Math.random() * 1e6) + 7919) | 0 })),
     [],
   );
+
+  // 核心参数（颜色/砌法）变化时同步到 URL（replaceState，默认值省略，不进历史栈）
+  const { baseHex, groutColor, chip } = params;
+  useEffect(() => {
+    writeUrlParams(params);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseHex, groutColor, chip]);
 
   // 重绘（参数变化 → 重建矩阵 → 画 canvas）
   useEffect(() => {
