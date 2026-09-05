@@ -15,16 +15,16 @@
 
       <!-- 窄屏功能 Tab -->
       <md-tabs id="mobileTabs" active-tab-index="0">
-        <md-primary-tab aria-label="种子颜色">
+        <md-primary-tab aria-label="色彩">
           <svg slot="icon" viewBox="0 -960 960 960" width="22" height="22" fill="currentColor"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-85 32-158t87.5-127q55.5-54 130-84.5T489-880q79 0 150 26.5T763.5-780q53.5 47 85 111.5T880-527q0 108-63 170.5T650-294h-75q-18 0-31 14t-13 31q0 27 14.5 46t14.5 44q0 38-21 58.5T480-80Zm0-400Zm-198 11q15-15 15-35t-15-35q-15-15-35-15t-35 15q-15 15-15 35t15 35q15 15 35 15t35-15Zm126-170q15-15 15-35t-15-35q-15-15-35-15t-35 15q-15 15-15 35t15 35q15 15 35 15t35-15Zm214 0q15-15 15-35t-15-35q-15-15-35-15t-35 15q-15 15-15 35t15 35q15 15 35 15t35-15Zm131 170q15-15 15-35t-15-35q-15-15-35-15t-35 15q-15 15-15 35t15 35q15 15 35 15t35-15ZM480-140q11 0 15.5-4.5T500-159q0-14-14.5-26T471-238q0-46 30-81t76-35h73q76 0 123-44.5T820-527q0-132-100-212.5T489-820q-146 0-247.5 98.5T140-480q0 141 99.5 240.5T480-140Z"/></svg>
         </md-primary-tab>
-        <md-primary-tab aria-label="墙身尺寸">
+        <md-primary-tab aria-label="尺寸">
           <svg slot="icon" viewBox="0 -960 960 960" width="22" height="22" fill="currentColor"><path d="M140-240q-24 0-42-18t-18-42v-360q0-23 18-41.5t42-18.5h680q24 0 42 18.5t18 41.5v360q0 24-18 42t-42 18H140Zm0-60h680v-360H690v180h-60v-180H510v180h-60v-180H330v180h-60v-180H140v360Zm130-180h60-60Zm180 0h60-60Zm180 0h60-60Zm-150 0Z"/></svg>
         </md-primary-tab>
-        <md-primary-tab aria-label="色差幅度">
+        <md-primary-tab aria-label="色差">
           <svg slot="icon" viewBox="0 -960 960 960" width="22" height="22" fill="currentColor"><path d="M427-120v-225h60v83h353v60H487v82h-60Zm-307-82v-60h247v60H120Zm187-166v-82H120v-60h187v-84h60v226h-60Zm120-82v-60h413v60H427Zm166-165v-225h60v82h187v60H653v83h-60Zm-473-83v-60h413v60H120Z"/></svg>
         </md-primary-tab>
-        <md-primary-tab aria-label="样式">
+        <md-primary-tab aria-label="布局">
           <svg slot="icon" viewBox="0 -960 960 960" width="22" height="22" fill="currentColor"><path d="M120-260v-440q0-24.75 17.63-42.38Q155.25-760 180-760h600q24.75 0 42.38 17.62Q840-724.75 840-700v440q0 24.75-17.62 42.37Q804.75-200 780-200H180q-24.75 0-42.37-17.63Q120-235.25 120-260Zm270-250h390v-190H390v190Zm229 250h161v-190H619v190Zm-229 0h162v-190H390v190Zm-210 0h150v-440H180v440Z"/></svg>
         </md-primary-tab>
         <md-primary-tab aria-label="导出">
@@ -34,14 +34,14 @@
 
       <div class="tabpanels">
 
-      <!-- 种子颜色 -->
+      <!-- 色彩 -->
             <section class="group tabpanel active" data-tab="0" id="tabpanel-0">
-              <h2>种子颜色</h2>
+              <h2>色彩</h2>
               <div class="seedrow">
                 <button class="swatch" id="btnSwatch" title="选择颜色" aria-label="选择颜色">
                   <span id="swatchFill"></span>
                 </button>
-                <md-outlined-text-field id="seedHex" label="HEX" value="#2E6F8E"></md-outlined-text-field>
+                <md-outlined-text-field id="seedHex" label="砖块颜色" value="#2E6F8E"></md-outlined-text-field>
                 <input type="color" id="seedColor" value="#2e6f8e" hidden />
               </div>
 
@@ -50,7 +50,7 @@
                 <button class="swatch" id="btnGroutPick" title="选择砖缝颜色" aria-label="选择砖缝颜色">
                   <span id="groutFill"></span>
                 </button>
-                <md-outlined-text-field id="groutHex" label="砖缝HEX" value="#0B0D11"></md-outlined-text-field>
+                <md-outlined-text-field id="groutHex" label="砖缝颜色" value="#0B0D11"></md-outlined-text-field>
                 <input type="color" id="groutColor" value="#0b0d11" hidden />
               </div>
 
@@ -61,9 +61,9 @@
               </label>
             </section>
 
-      <!-- 墙身尺寸 -->
+      <!-- 尺寸 -->
       <section class="group tabpanel" data-tab="1" id="tabpanel-1">
-        <h2>墙身尺寸</h2>
+        <h2>尺寸</h2>
         <div class="slidergrid">
           <div class="sf-row">
             <span class="lbl">列数</span><output id="vCols">30</output>
@@ -84,9 +84,9 @@
         </div>
       </section>
 
-      <!-- 色差幅度 -->
+      <!-- 色差 -->
       <section class="group tabpanel" data-tab="2" id="tabpanel-2">
-        <h2>色差幅度（越大越跳色）</h2>
+        <h2>色差</h2>
         <div class="slidergrid">
           <div class="sf-row">
             <span class="lbl">色相偏移</span><output id="vHue">±0°</output>
@@ -103,10 +103,10 @@
         </div>
       </section>
 
-      <!-- 样式 -->
+      <!-- 布局 -->
       <section class="group tabpanel" data-tab="3" id="tabpanel-3">
-        <h2>样式</h2>
-        <div class="lbl">砌法</div>
+        <h2>布局</h2>
+        <div class="lbl">风格</div>
         <div class="chips">
           <md-filter-chip id="chipNoise" selected>港铁风格</md-filter-chip>
           <md-filter-chip id="chipGrid">工字形</md-filter-chip>
@@ -117,10 +117,17 @@
           </div>
           <md-slider id="motifAmp" min="0" max="30" step="1" value="9"></md-slider>
         </div>
+        <md-outlined-button id="regenerate">
+            <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 8.74C4.46 9.97 4 11.43 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4z"/>
+            </svg>
+            换个砌法
+          </md-outlined-button>
       </section>
 
-      <!-- 操作（导出） -->
+      <!-- 导出 -->
       <section class="group tabpanel" data-tab="4" id="tabpanel-4">
+        <h2>导出</h2>
         <div class="btns">
           <md-filled-button id="download">
             <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
@@ -133,12 +140,6 @@
               <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
             </svg>
             导出 PNG
-          </md-outlined-button>
-          <md-outlined-button id="regenerate">
-            <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-              <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 8.74C4.46 9.97 4 11.43 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4z"/>
-            </svg>
-            换个砌法（重新随机）
           </md-outlined-button>
         </div>
         <div class="meta" id="meta">&nbsp;</div>
