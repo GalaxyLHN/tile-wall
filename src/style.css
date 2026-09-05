@@ -254,6 +254,9 @@ md-tabs#mobileTabs { display: none; }
   md-tabs#mobileTabs {
     display: block; flex: none;
     border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    /* 收窄 Tab 高度：默认 64px 偏高 */
+    --md-primary-tab-container-height: 52px;
+    --md-primary-tab-with-icon-and-label-text-container-height: 52px;
   }
 
   .tabpanels {
