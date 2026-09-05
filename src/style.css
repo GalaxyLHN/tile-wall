@@ -119,6 +119,14 @@ h2 {
 .seedrow { display: flex; align-items: center; gap: 10px; }
 .seedrow md-outlined-text-field { flex: 1; }
 
+/* ---------- 砖缝颜色（与种子颜色同款样式） ---------- */
+.seedrow + .seedrow { margin-top: 10px; }
+.seedrow md-filter-chip { flex: none; }
+.swatch span.transparent {
+  /* 灰白棋盘格：表示透明 */
+  background: repeating-conic-gradient(#6b6b6b 0% 25%, #9a9a9a 0% 50%) 0 0 / 8px 8px;
+}
+
 .swatch {
   width: 46px; height: 46px; flex: none;
   border-radius: 8px;

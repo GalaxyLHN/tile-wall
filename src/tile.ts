@@ -69,13 +69,12 @@ export interface TileParams {
   tile: number;
   grout: number;
   baseHex: string;
+  /** 砖缝颜色；'transparent' 表示透明 */
+  groutColor: string;
 }
 
 export const GRID_GRID_BORDER = 5;
 export const GRID_NOISE_BORDER = 1;
-export function groutColor(): string {
-  return '#0b0d11';
-}
 
 function gaussPaired(rand: () => number): number {
   const a = rand();
@@ -127,8 +126,14 @@ export function renderToCanvas(
   const H = p.rows * step + p.grout;
   canvas.width = W;
   canvas.height = H;
-  ctx.fillStyle = groutColor();
-  ctx.fillRect(0, 0, W, H);
+  const transparent = p.groutColor === 'transparent';
+  // 预览底板跟随砖缝透明度，透明时露出页面背景
+  canvas.style.background = transparent ? 'transparent' : '#0b0d11';
+  ctx.clearRect(0, 0, W, H);
+  if (!transparent) {
+    ctx.fillStyle = p.groutColor;
+    ctx.fillRect(0, 0, W, H);
+  }
   ctx.imageSmoothingEnabled = true;
 
   if (p.chip === 'grid') {
@@ -189,5 +194,7 @@ export function exportSVG(cells: string[][], p: TileParams): string {
     }
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-<rect width="${W}" height="${H}" fill="${groutColor()}"/>${rects}</svg>`;
-}
+  ${
+      p.groutColor === 'transparent' ? '' : `<rect width="${W}" height="${H}" fill="${p.groutColor}"/>`
+    }${rects}</svg>`;
+  }

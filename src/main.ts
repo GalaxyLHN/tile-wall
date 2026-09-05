@@ -35,6 +35,7 @@ const state: TileParams = {
   tile: 34,
   grout: 5,
   baseHex: '#2E6F8E',
+  groutColor: '#0B0D11',
 };
 
 // ============ DOM 辅助 ============
@@ -95,6 +96,24 @@ function setChip(mode: ChipMode): void {
   repaint();
 }
 
+let lastGroutHex = '#0B0D11';
+let groutTransparent = false;
+
+function setGroutColor(c: string): void {
+  state.groutColor = c;
+  const transparent = c === 'transparent';
+  groutTransparent = transparent; // 单一事实来源，避免与 chip 点击不同步
+  (byId('chipGroutTransparent') as unknown as { selected: boolean }).selected = transparent;
+  const fill = byId('groutFill') as HTMLElement;
+  fill.className = transparent ? 'transparent' : '';
+  fill.style.background = transparent ? '' : c;
+  if (!transparent) {
+    lastGroutHex = c.toUpperCase();
+    (byId('groutHex') as unknown as { value: string }).value = lastGroutHex;
+  }
+  repaint();
+}
+
 function regenerate(): void {
   state.seed = (state.seed + Math.floor(Math.random() * 1e6) + 7919) | 0;
   repaint();
@@ -141,6 +160,25 @@ function bind(): void {
   byId('chipNoise').addEventListener('click', () => setChip('noise'));
   byId('chipGrid').addEventListener('click', () => setChip('grid'));
 
+  // 砖缝颜色 / 透明
+  byId('btnGroutPick').addEventListener('click', () =>
+    (byId('groutColor') as HTMLInputElement).click(),
+  );
+  byId('groutColor').addEventListener('input', (e) =>
+    setGroutColor((e.target as HTMLInputElement).value),
+  );
+  byId('groutHex').addEventListener('change', (e) => {
+    const target = e.target as unknown as { value: string };
+    const m = /^#?([0-9a-fA-F]{6})$/.exec(target.value.trim());
+    if (m) setGroutColor('#' + m[1]);
+    else target.value = state.groutColor === 'transparent' ? lastGroutHex : state.groutColor;
+  });
+  byId('chipGroutTransparent').addEventListener('click', () => {
+    groutTransparent = !groutTransparent;
+    setGroutColor(groutTransparent ? 'transparent' : lastGroutHex);
+  });
+  setGroutColor(state.groutColor); // 初始化砖缝色 UI
+
   // 窄屏功能 Tab
   const tabs = byId('mobileTabs') as HTMLElement & { activeTabIndex: number };
   const activateTab = (idx: number) => {
@@ -157,6 +195,7 @@ function bind(): void {
   // 操作
   byId('regenerate').addEventListener('click', regenerate);
   byId('download').addEventListener('click', download);
+  byId('downloadPng').addEventListener('click', downloadPNG);
 }
 
 function download(): void {
@@ -170,6 +209,21 @@ function download(): void {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+function downloadPNG(): void {
+  const a = document.createElement('a');
+  a.download =
+    `mtr-wall-${state.cols}x${state.rows}-${state.baseHex.replace('#', '')}-seed${state.seed.toString(16)}.png`;
+  // 预览 canvas 就是当前参数渲染的成品，直接按原分辨率导出
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    a.href = URL.createObjectURL(blob);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }, 'image/png');
 }
 
 // ============ 启动 ============

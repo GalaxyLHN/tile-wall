@@ -50,6 +50,16 @@
           </md-icon-button>
           <input type="color" id="seedColor" value="#2e6f8e" hidden />
         </div>
+
+        <!-- 砖缝颜色（与种子颜色同款样式） -->
+        <div class="seedrow">
+          <button class="swatch" id="btnGroutPick" title="选择砖缝颜色" aria-label="选择砖缝颜色">
+            <span id="groutFill"></span>
+          </button>
+          <md-outlined-text-field id="groutHex" label="砖缝HEX" value="#0B0D11"></md-outlined-text-field>
+          <md-filter-chip id="chipGroutTransparent">透明</md-filter-chip>
+          <input type="color" id="groutColor" value="#0b0d11" hidden />
+        </div>
       </section>
 
       <!-- 墙身尺寸 -->
@@ -119,6 +129,12 @@
             </svg>
             导出 SVG
           </md-filled-button>
+          <md-outlined-button id="downloadPng">
+            <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
+            导出 PNG
+          </md-outlined-button>
           <md-outlined-button id="regenerate">
             <svg slot="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 8.74C4.46 9.97 4 11.43 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4z"/>
