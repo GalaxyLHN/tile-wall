@@ -147,7 +147,7 @@ h2 {
   font-size: 14px;
   color: var(--md-sys-color-on-surface);
 }
-.swatch span.transparent {
+span.transparent {
   /* 灰白棋盘格：表示透明 */
   background: repeating-conic-gradient(#6b6b6b 0% 25%, #9a9a9a 0% 50%) 0 0 / 8px 8px;
 }
