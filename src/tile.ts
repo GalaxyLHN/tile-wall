@@ -73,8 +73,8 @@ export interface TileParams {
   groutColor: string;
 }
 
-export const GRID_GRID_BORDER = 5;
-export const GRID_NOISE_BORDER = 1;
+/** 两种砌法统一的砖块内缩量：可视间隙 = grout + 2×rim */
+export const TILE_RIM = 2;
 
 function gaussPaired(rand: () => number): number {
   const a = rand();
@@ -139,7 +139,7 @@ export function renderToCanvas(
   if (p.chip === 'grid') {
     // 工字形：隔行偏移半块，模拟错缝
     const off = p.tile / 2 + p.grout / 2;
-    const rim = GRID_GRID_BORDER;
+    const rim = TILE_RIM;
     for (let r = 0; r < p.rows; r++) {
       const shift = r % 2 === 0 ? 0 : off;
       for (let c = 0; c < p.cols; c++) {
@@ -150,8 +150,8 @@ export function renderToCanvas(
       }
     }
   } else {
-    // 港铁风格：等大方砖，只保留 1px 缝
-    const rim = GRID_NOISE_BORDER;
+    // 港铁风格：等大方砖，细缝
+    const rim = TILE_RIM;
     for (let r = 0; r < p.rows; r++) {
       for (let c = 0; c < p.cols; c++) {
         const x = p.grout + c * step;
@@ -171,7 +171,7 @@ export function exportSVG(cells: string[][], p: TileParams): string {
   let rects = '';
   if (p.chip === 'grid') {
     const off = p.tile / 2 + p.grout / 2;
-    const rim = GRID_GRID_BORDER;
+    const rim = TILE_RIM;
     const s = p.tile - rim * 2;
     for (let r = 0; r < p.rows; r++) {
       const shift = r % 2 === 0 ? 0 : off;
@@ -183,7 +183,7 @@ export function exportSVG(cells: string[][], p: TileParams): string {
       }
     }
   } else {
-    const rim = GRID_NOISE_BORDER;
+    const rim = TILE_RIM;
     const s = p.tile - rim * 2;
     for (let r = 0; r < p.rows; r++) {
       for (let c = 0; c < p.cols; c++) {
