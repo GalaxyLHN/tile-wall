@@ -50,6 +50,18 @@
   --md-sys-color-surface-container-highest: #3b3c34;
 }
 
+/* material-color-utilities 0.4.0 不生成 surface-container-* 容器角色，
+   亮色主题下用中性浅色兜底，避免残留上面的暗色默认（面板黑底、预览渐变一端变黑）。 */
+@media (prefers-color-scheme: light) {
+  :root {
+    --md-sys-color-surface-container-lowest: #fdfbf9;
+    --md-sys-color-surface-container-low: #f5f3f1;
+    --md-sys-color-surface-container: #efedea;
+    --md-sys-color-surface-container-high: #e9e7e4;
+    --md-sys-color-surface-container-highest: #e3e1de;
+  }
+}
+
 /* ============ 布局 ============ */
 * { box-sizing: border-box; }
 

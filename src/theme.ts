@@ -9,6 +9,8 @@ const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 /**
  * 用种子色生成整套 Material 3 主题并应用到页面。
  * 亮/暗跟随操作系统设置（prefers-color-scheme）。
+ * 注意 0.4.0 的 applyTheme 不写 surface-container-* 容器角色，
+ * 那几档的颜色默认由 style.css 的 @media (prefers-color-scheme) 兜底。
  */
 export function applyThemeFromSeed(
   seedHex: string,
