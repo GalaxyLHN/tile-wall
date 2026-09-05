@@ -5,7 +5,7 @@ import './style.css';
 import '@material/web/slider/slider.js';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
-import '@material/web/iconbutton/icon-button.js';
+import '@material/web/checkbox/checkbox.js';
 import '@material/web/chips/filter-chip.js';
 import '@material/web/textfield/outlined-text-field.js';
 import '@material/web/tabs/tabs.js';
@@ -97,13 +97,12 @@ function setChip(mode: ChipMode): void {
 }
 
 let lastGroutHex = '#0B0D11';
-let groutTransparent = false;
 
 function setGroutColor(c: string): void {
   state.groutColor = c;
   const transparent = c === 'transparent';
-  groutTransparent = transparent; // 单一事实来源，避免与 chip 点击不同步
-  (byId('chipGroutTransparent') as unknown as { selected: boolean }).selected = transparent;
+  // 单一事实来源：state.groutColor；checkbox 选中态只做同步
+  (byId('chkGroutTransparent') as unknown as { checked: boolean }).checked = transparent;
   const fill = byId('groutFill') as HTMLElement;
   fill.className = transparent ? 'transparent' : '';
   fill.style.background = transparent ? '' : c;
@@ -135,21 +134,14 @@ function bind(): void {
     (byId('seedColor') as HTMLInputElement).click(),
   );
   byId('seedColor').addEventListener('input', (e) =>
-    applyHex((e.target as HTMLInputElement).value),
-  );
-  byId('btnRandom').addEventListener('click', () => {
-    // 随机取色：色相全域 0–360°，饱和度与明度均 30–70%
-    const h = Math.random() * 360;
-    const s = (30 + Math.random() * 40) / 100;
-    const l = (30 + Math.random() * 40) / 100;
-    applyHex(hslToHex(h, s, l));
-  });
-  byId('seedHex').addEventListener('change', (e) => {
-    const target = e.target as unknown as { value: string };
-    const m = /^#?([0-9a-fA-F]{6})$/.exec(target.value.trim());
-    if (m) applyHex('#' + m[1]);
-    else target.value = state.baseHex;
-  });
+      applyHex((e.target as HTMLInputElement).value),
+    );
+    byId('seedHex').addEventListener('change', (e) => {
+      const target = e.target as unknown as { value: string };
+      const m = /^#?([0-9a-fA-F]{6})$/.exec(target.value.trim());
+      if (m) applyHex('#' + m[1]);
+      else target.value = state.baseHex;
+    });
 
   // 滑块（md-slider 会重发内部 range input 的 input/change 事件）
   (['hueR', 'satR', 'liqR', 'motifAmp', 'cols', 'rows', 'tile', 'grout'] as const).forEach((id) =>
@@ -173,10 +165,10 @@ function bind(): void {
     if (m) setGroutColor('#' + m[1]);
     else target.value = state.groutColor === 'transparent' ? lastGroutHex : state.groutColor;
   });
-  byId('chipGroutTransparent').addEventListener('click', () => {
-    groutTransparent = !groutTransparent;
-    setGroutColor(groutTransparent ? 'transparent' : lastGroutHex);
-  });
+  byId('chkGroutTransparent').addEventListener('change', (e) => {
+      const checked = (e.target as unknown as { checked: boolean }).checked;
+      setGroutColor(checked ? 'transparent' : lastGroutHex);
+    });
   setGroutColor(state.groutColor); // 初始化砖缝色 UI
 
   // 窄屏功能 Tab

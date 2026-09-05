@@ -35,32 +35,31 @@
       <div class="tabpanels">
 
       <!-- 种子颜色 -->
-      <section class="group tabpanel active" data-tab="0" id="tabpanel-0">
-        <h2>种子颜色</h2>
-        <div class="seedrow">
-          <button class="swatch" id="btnSwatch" title="选择颜色" aria-label="选择颜色">
-            <span id="swatchFill"></span>
-          </button>
-          <md-outlined-text-field id="seedHex" label="HEX" value="#2E6F8E"></md-outlined-text-field>
-          <md-icon-button id="btnRandom" aria-label="随机取色">
-            <!-- dice / casino icon -->
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM7.5 18c-.83 0-1.5-.67-1.5-1.5S6.67 15 7.5 15s1.5.67 1.5 1.5S8.33 18 7.5 18zm0-9C6.67 9 6 8.33 6 7.5S6.67 6 7.5 6 9 6.67 9 7.5 8.33 9 7.5 9zm4.5 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm0-9c-.83 0-1.5-.67-1.5-1.5z"/>
-            </svg>
-          </md-icon-button>
-          <input type="color" id="seedColor" value="#2e6f8e" hidden />
-        </div>
+            <section class="group tabpanel active" data-tab="0" id="tabpanel-0">
+              <h2>种子颜色</h2>
+              <div class="seedrow">
+                <button class="swatch" id="btnSwatch" title="选择颜色" aria-label="选择颜色">
+                  <span id="swatchFill"></span>
+                </button>
+                <md-outlined-text-field id="seedHex" label="HEX" value="#2E6F8E"></md-outlined-text-field>
+                <input type="color" id="seedColor" value="#2e6f8e" hidden />
+              </div>
 
-        <!-- 砖缝颜色（与种子颜色同款样式） -->
-        <div class="seedrow">
-          <button class="swatch" id="btnGroutPick" title="选择砖缝颜色" aria-label="选择砖缝颜色">
-            <span id="groutFill"></span>
-          </button>
-          <md-outlined-text-field id="groutHex" label="砖缝HEX" value="#0B0D11"></md-outlined-text-field>
-          <md-filter-chip id="chipGroutTransparent">透明</md-filter-chip>
-          <input type="color" id="groutColor" value="#0b0d11" hidden />
-        </div>
-      </section>
+              <!-- 砖缝颜色（与种子颜色同款样式） -->
+              <div class="seedrow">
+                <button class="swatch" id="btnGroutPick" title="选择砖缝颜色" aria-label="选择砖缝颜色">
+                  <span id="groutFill"></span>
+                </button>
+                <md-outlined-text-field id="groutHex" label="砖缝HEX" value="#0B0D11"></md-outlined-text-field>
+                <input type="color" id="groutColor" value="#0b0d11" hidden />
+              </div>
+
+              <!-- 砖缝透明开关 -->
+              <label class="groutcheck">
+                <md-checkbox id="chkGroutTransparent" touch-target="none"></md-checkbox>
+                <span>砖缝透明</span>
+              </label>
+            </section>
 
       <!-- 墙身尺寸 -->
       <section class="group tabpanel" data-tab="1" id="tabpanel-1">
